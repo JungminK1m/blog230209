@@ -4,7 +4,6 @@ server:
     encoding:
       charset: utf-8
       force: true
- 
 spring:
   mvc:
     view:
@@ -27,7 +26,6 @@ spring:
   output:
     ansi:
       enabled: always
-
 mybatis:
   mapper-locations:
   - classpath:mapper/**.xml

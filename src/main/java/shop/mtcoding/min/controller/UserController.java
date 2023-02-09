@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import shop.mtcoding.min.dto.UserRequestDto.JoinRequestDto;
+import shop.mtcoding.min.dto.UserRequestDto.LoginRequestDto;
 import shop.mtcoding.min.handler.exception.CustomException;
 import shop.mtcoding.min.service.UserService;
 
@@ -40,6 +41,18 @@ public class UserController {
     @GetMapping("/loginForm")
     public String loginForm() {
         return "user/loginForm";
+    }
+
+    @PostMapping("/login")
+    public String login(LoginRequestDto loginRequestDto) {
+        if (loginRequestDto == null || loginRequestDto.getUsername().isEmpty()) {
+            throw new CustomException("username을 입력하세요.");
+        }
+        if (loginRequestDto == null || loginRequestDto.getPassword().isEmpty()) {
+            throw new CustomException("password를 입력하세요.");
+        }
+        userService.로그인(loginRequestDto);
+        return "redirect:/";
     }
 
     @GetMapping("/user/updateForm")
