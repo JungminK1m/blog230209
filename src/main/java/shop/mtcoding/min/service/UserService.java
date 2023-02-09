@@ -6,8 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import shop.mtcoding.min.dto.UserRequestDto.JoinRequestDto;
-import shop.mtcoding.min.dto.UserRequestDto.LoginRequestDto;
+import shop.mtcoding.min.dto.user.UserRequestDto.JoinRequestDto;
+import shop.mtcoding.min.dto.user.UserRequestDto.LoginRequestDto;
 import shop.mtcoding.min.handler.exception.CustomException;
 import shop.mtcoding.min.model.User;
 import shop.mtcoding.min.model.UserRepository;
