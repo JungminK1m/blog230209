@@ -3,7 +3,7 @@ create table user_tb(
     username varchar unique not null,
     password varchar not null,
     email varchar not null,
-    create_at timestamp not null
+    created_at timestamp not null
 );
 
 create table board_tb(
@@ -11,5 +11,5 @@ create table board_tb(
     title varchar(100) not null,
     content longtext not null,
     user_id int not null,
-    create_at timestamp not null
+    created_at timestamp not null
 );
