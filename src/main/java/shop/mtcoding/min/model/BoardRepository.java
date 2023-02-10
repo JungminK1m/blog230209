@@ -10,5 +10,11 @@ public interface BoardRepository {
 
     public List<Board> findAll();
 
-    public int insert(@Param("title") String title, @Param("content") String content);
+    public int insert(@Param("title") String title, @Param("content") String content, @Param("userId") int userId);
+
+    public int findById(int id);
+
+    public int updateById(@Param("id") int id, @Param("title") String title, @Param("content") String content);
+
+    public int deleteById(int id);
 }

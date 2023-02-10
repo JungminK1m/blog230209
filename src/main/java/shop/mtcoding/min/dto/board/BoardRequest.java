@@ -3,10 +3,10 @@ package shop.mtcoding.min.dto.board;
 import lombok.Getter;
 import lombok.Setter;
 
-public class BoardRequestDto {
+public class BoardRequest {
 
-    @Getter
     @Setter
+    @Getter
     public static class BoardSaveRequestDto {
         private String title;
         private String content;

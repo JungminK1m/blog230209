@@ -6,8 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import shop.mtcoding.min.dto.user.UserRequestDto.JoinRequestDto;
-import shop.mtcoding.min.dto.user.UserRequestDto.LoginRequestDto;
+import shop.mtcoding.min.dto.board.BoardRequest.BoardSaveRequestDto;
+import shop.mtcoding.min.dto.user.UserRequest.JoinRequestDto;
+import shop.mtcoding.min.dto.user.UserRequest.LoginRequestDto;
 import shop.mtcoding.min.handler.exception.CustomException;
 import shop.mtcoding.min.model.User;
 import shop.mtcoding.min.model.UserRepository;
@@ -41,4 +42,5 @@ public class UserService {
         }
         return checkUser;
     }
+
 }

@@ -3,7 +3,7 @@ package shop.mtcoding.min.dto.user;
 import lombok.Getter;
 import lombok.Setter;
 
-public class UserRequestDto {
+public class UserRequest {
 
     @Getter
     @Setter

@@ -5,8 +5,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
-import shop.mtcoding.min.dto.user.UserRequestDto.JoinRequestDto;
-import shop.mtcoding.min.dto.user.UserRequestDto.LoginRequestDto;
+import shop.mtcoding.min.dto.user.UserRequest.JoinRequestDto;
+import shop.mtcoding.min.dto.user.UserRequest.LoginRequestDto;
 import shop.mtcoding.min.handler.exception.CustomException;
 import shop.mtcoding.min.service.UserService;
 
