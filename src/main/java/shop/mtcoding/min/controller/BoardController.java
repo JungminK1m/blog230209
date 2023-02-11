@@ -32,17 +32,17 @@ public class BoardController {
         return "board/detail";
     }
 
-    @GetMapping("/saveForm")
+    @GetMapping("/board/saveForm")
     public String saveForm() {
         return "board/saveForm";
     }
 
-    @GetMapping("/updateForm")
+    @GetMapping("/board/updateForm")
     public String updateForm() {
         return "board/updateForm";
     }
 
-    @PostMapping("/save")
+    @PostMapping("/board")
     public String save(BoardSaveRequestDto boardSaveRequestDto) {
         User checkUser = (User) session.getAttribute("checkUser");
         if (checkUser == null) {

@@ -1,5 +1,7 @@
 package shop.mtcoding.min.controller;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -8,6 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import shop.mtcoding.min.dto.user.UserRequest.JoinRequestDto;
 import shop.mtcoding.min.dto.user.UserRequest.LoginRequestDto;
 import shop.mtcoding.min.handler.exception.CustomException;
+import shop.mtcoding.min.model.User;
 import shop.mtcoding.min.service.UserService;
 
 @Controller
@@ -15,6 +18,9 @@ public class UserController {
 
     @Autowired
     UserService userService;
+
+    @Autowired
+    private HttpSession session;
 
     @GetMapping("/joinForm")
     public String joinForm() {
@@ -51,7 +57,8 @@ public class UserController {
         if (loginRequestDto == null || loginRequestDto.getPassword().isEmpty()) {
             throw new CustomException("password를 입력하세요.");
         }
-        userService.로그인(loginRequestDto);
+        User checkUser = userService.로그인(loginRequestDto);
+        session.setAttribute("checkUser", checkUser);
         return "redirect:/";
     }
 
