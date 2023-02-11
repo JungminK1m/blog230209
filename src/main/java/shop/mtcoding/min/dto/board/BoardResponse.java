@@ -12,4 +12,15 @@ public class BoardResponse {
         private String title;
         private String username;
     }
+
+    @Setter
+    @Getter
+    public static class BoardDetailResponseDto {
+        private int id;
+        private String title;
+        private String content;
+        private int userId;
+        private String username;
+
+    }
 }

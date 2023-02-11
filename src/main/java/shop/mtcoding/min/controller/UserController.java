@@ -41,6 +41,7 @@ public class UserController {
 
         userService.회원가입(joinRequestDto);
         // 회원가입이 잘 됐으면
+        System.out.println("회원가입 됨");
         return "redirect:/loginForm";
     }
 
@@ -71,6 +72,7 @@ public class UserController {
     @GetMapping("/logout")
     public String logout() {
         session.invalidate();
-        return "redirect:/board";
+        System.out.println("로그아웃 됨");
+        return "redirect:/";
     }
 }
