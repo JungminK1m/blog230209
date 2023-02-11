@@ -5,11 +5,13 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import shop.mtcoding.min.dto.board.BoardRequest.BoardSaveRequestDto;
 import shop.mtcoding.min.handler.exception.CustomException;
 import shop.mtcoding.min.model.BoardRepository;
 
+@Transactional(readOnly = true)
 @Service
 public class BoardService {
 
@@ -19,6 +21,7 @@ public class BoardService {
     @Autowired
     HttpSession session;
 
+    @Transactional
     public void 글쓰기(BoardSaveRequestDto boardSaveRequestDto, int userId) {
         int result = boardRepository.insert(boardSaveRequestDto.getTitle(), boardSaveRequestDto.getContent(), userId);
         if (result != 1) {

@@ -5,11 +5,13 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import shop.mtcoding.min.dto.board.BoardRequest.BoardSaveRequestDto;
 import shop.mtcoding.min.handler.exception.CustomException;
+import shop.mtcoding.min.model.BoardRepository;
 import shop.mtcoding.min.model.User;
 import shop.mtcoding.min.service.BoardService;
 
@@ -22,8 +24,12 @@ public class BoardController {
     @Autowired
     BoardService boardService;
 
+    @Autowired
+    BoardRepository boardRepository;
+
     @GetMapping({ "/", "/main" })
-    public String main() {
+    public String main(Model model) {
+        model.addAttribute("dtos", boardRepository.findAllWithUser());
         return "board/main";
     }
 
@@ -55,7 +61,7 @@ public class BoardController {
             throw new CustomException("content를 작성해 주세요.");
         }
         boardService.글쓰기(boardSaveRequestDto, checkUser.getId());
-
+        System.out.println("글 작성됨");
         return "redirect:/";
     }
 }

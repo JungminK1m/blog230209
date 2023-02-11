@@ -59,6 +59,7 @@ public class UserController {
         }
         User checkUser = userService.로그인(loginRequestDto);
         session.setAttribute("checkUser", checkUser);
+        System.out.println("로그인 됨");
         return "redirect:/";
     }
 
@@ -67,4 +68,9 @@ public class UserController {
         return "user/updateForm";
     }
 
+    @GetMapping("/logout")
+    public String logout() {
+        session.invalidate();
+        return "redirect:/board";
+    }
 }
