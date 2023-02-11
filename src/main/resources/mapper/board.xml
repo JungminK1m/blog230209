@@ -27,11 +27,6 @@
         update board_tb set title= #{title},content= #{content} where id = #{id} 
     </update>    
 
-    <sql id="findByIdWithUser">
-          
-    </sql>
-
-
     <select id="findByIdWithUser" resultType="shop.mtcoding.min.dto.board.BoardResponse$BoardDetailResponseDto">
         select bt.id, bt.title, bt.content, bt.user_id, ut.username
         from board_tb bt

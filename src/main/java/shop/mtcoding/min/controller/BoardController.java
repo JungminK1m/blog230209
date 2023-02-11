@@ -4,13 +4,18 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+import shop.mtcoding.min.dto.ResponseDto;
 import shop.mtcoding.min.dto.board.BoardRequest.BoardSaveRequestDto;
+import shop.mtcoding.min.handler.exception.CustomApiException;
 import shop.mtcoding.min.handler.exception.CustomException;
 import shop.mtcoding.min.model.BoardRepository;
 import shop.mtcoding.min.model.User;
@@ -65,5 +70,16 @@ public class BoardController {
         boardService.글쓰기(boardSaveRequestDto, checkUser.getId());
         System.out.println("글 작성됨");
         return "redirect:/";
+    }
+
+    @DeleteMapping("/board/{id}")
+    public @ResponseBody ResponseEntity<?> delete(@PathVariable int id) {
+        User checkUser = (User) session.getAttribute("checkUser");
+        if (checkUser == null) {
+            throw new CustomApiException("인증이 되지 않아 삭제할 수 없습니다.", HttpStatus.UNAUTHORIZED);
+        }
+
+        boardService.게시글삭제(id, checkUser.getId());
+        return new ResponseEntity<>(new ResponseDto<>(1, "삭제성공", null), HttpStatus.OK);
     }
 }
