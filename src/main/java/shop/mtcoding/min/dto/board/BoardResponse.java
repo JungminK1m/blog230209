@@ -10,6 +10,7 @@ public class BoardResponse {
     public static class BoardMainResponseDto {
         private int id;
         private String title;
+        private String thumbnail;
         private String username;
     }
 

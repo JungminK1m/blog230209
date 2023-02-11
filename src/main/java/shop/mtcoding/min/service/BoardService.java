@@ -21,7 +21,8 @@ public class BoardService {
 
     @Transactional
     public void 글쓰기(BoardSaveRequestDto boardSaveRequestDto, int userId) {
-        int result = boardRepository.insert(boardSaveRequestDto.getTitle(), boardSaveRequestDto.getContent(), userId);
+        int result = boardRepository.insert(boardSaveRequestDto.getTitle(), boardSaveRequestDto.getContent(), null,
+                userId);
         if (result != 1) {
             throw new CustomException("글쓰기 실패", HttpStatus.INTERNAL_SERVER_ERROR);
         }
