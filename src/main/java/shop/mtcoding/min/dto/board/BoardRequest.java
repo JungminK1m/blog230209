@@ -12,4 +12,11 @@ public class BoardRequest {
         private String content;
 
     }
+
+    @Getter
+    @Setter
+    public static class BoardUpdateRequestDto {
+        private String title;
+        private String content;
+    }
 }
