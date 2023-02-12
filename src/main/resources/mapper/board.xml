@@ -18,14 +18,14 @@
         select * from board_tb where id = #{id}
     </select>    
     <insert id="insert">
-        insert into board_tb (title, content, user_id, created_at) values(#{title}, #{content}, #{userId}, now())
-    </insert>    
+        insert into board_tb (title, content, thumbnail, user_id, created_at) values(#{title}, #{content}, #{thumbnail}, #{userId}, now())
+    </insert>        
     <delete id="deleteById" >
         delete from board_tb where id = #{id} 
     </delete>    
     <update id="updateById" >
-        update board_tb set title= #{title},content= #{content} where id = #{id} 
-    </update>    
+        update board_tb set title= #{title},content= #{content}, thumbnail=#{thumbnail} where id = #{id}
+    </update>     
 
     <select id="findByIdWithUser" resultType="shop.mtcoding.min.dto.board.BoardResponse$BoardDetailResponseDto">
         select bt.id, bt.title, bt.content, bt.user_id, ut.username

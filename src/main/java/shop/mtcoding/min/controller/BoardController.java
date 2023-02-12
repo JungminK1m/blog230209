@@ -73,20 +73,20 @@ public class BoardController {
     }
 
     @PostMapping("/board")
-    public String save(BoardSaveRequestDto boardSaveRequestDto) {
+    public @ResponseBody ResponseEntity<?> save(@RequestBody BoardSaveRequestDto boardSaveRequestDto) {
         User checkUser = (User) session.getAttribute("checkUser");
         if (checkUser == null) {
-            throw new CustomException("로그인이 필요합니다.", HttpStatus.UNAUTHORIZED);
+            throw new CustomApiException("로그인이 필요합니다.", HttpStatus.UNAUTHORIZED);
         }
         if (boardSaveRequestDto.getTitle() == null || boardSaveRequestDto.getTitle().isEmpty()) {
-            throw new CustomException("title을 작성해 주세요.");
+            throw new CustomApiException("title을 작성해 주세요.");
         }
         if (boardSaveRequestDto.getContent() == null || boardSaveRequestDto.getTitle().isEmpty()) {
-            throw new CustomException("content를 작성해 주세요.");
+            throw new CustomApiException("content를 작성해 주세요.");
         }
         boardService.글쓰기(boardSaveRequestDto, checkUser.getId());
         System.out.println("글 작성됨");
-        return "redirect:/";
+        return new ResponseEntity<>(new ResponseDto<>(1, "글쓰기성공", null), HttpStatus.CREATED);
     }
 
     @DeleteMapping("/board/{id}")

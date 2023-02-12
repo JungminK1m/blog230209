@@ -11,6 +11,7 @@ import shop.mtcoding.min.handler.exception.CustomApiException;
 import shop.mtcoding.min.handler.exception.CustomException;
 import shop.mtcoding.min.model.Board;
 import shop.mtcoding.min.model.BoardRepository;
+import shop.mtcoding.min.util.HtmlParser;
 
 @Transactional(readOnly = true)
 @Service
@@ -21,10 +22,11 @@ public class BoardService {
 
     @Transactional
     public void 글쓰기(BoardSaveRequestDto boardSaveRequestDto, int userId) {
-        int result = boardRepository.insert(boardSaveRequestDto.getTitle(), boardSaveRequestDto.getContent(), null,
+        String thumbnail = HtmlParser.getThumbnail(boardSaveRequestDto.getContent());
+        int result = boardRepository.insert(boardSaveRequestDto.getTitle(), boardSaveRequestDto.getContent(), thumbnail,
                 userId);
         if (result != 1) {
-            throw new CustomException("글쓰기 실패", HttpStatus.INTERNAL_SERVER_ERROR);
+            throw new CustomApiException("글쓰기 실패", HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
@@ -56,9 +58,10 @@ public class BoardService {
         if (boardPS.getUserId() != checkUserId) {
             throw new CustomApiException("게시글을 수정할 권한이 없습니다", HttpStatus.FORBIDDEN);
         }
-
-        int result = boardRepository.updateById(id, boardUpdateRequestDto.getTitle(),
-                boardUpdateRequestDto.getContent());
+        BoardSaveRequestDto boardSaveReqDto = new BoardSaveRequestDto();
+        String thumbnail = HtmlParser.getThumbnail(boardSaveReqDto.getContent());
+        int result = boardRepository.updateById(id, boardSaveReqDto.getTitle(), boardSaveReqDto.getContent(),
+                thumbnail);
         if (result != 1) {
             throw new CustomApiException("게시글을 수정에 실패하였습니다", HttpStatus.INTERNAL_SERVER_ERROR);
         }
